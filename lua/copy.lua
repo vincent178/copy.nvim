@@ -44,7 +44,7 @@ local function github_remote_file_url(start_line, end_line)
     return full_url
 end
 
-function M.remote_file_url()
+function M.copy_remote_file_url()
     local start_line, end_line, url
 
     -- Check if a range is provided
