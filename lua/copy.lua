@@ -21,7 +21,7 @@ function M.copy_relative_path()
     vim.fn.setreg("*", vim.fn.expand("%"))
 end
 
-function M.remote_file_url(start_line, end_line)
+local function github_remote_file_url(start_line, end_line)
     local line_number = start_line or vim.fn.line('.')
     local end_line_number = end_line or line_number
 
@@ -44,7 +44,7 @@ function M.remote_file_url(start_line, end_line)
     return full_url
 end
 
-function M.github_linker_command()
+function M.remote_file_url()
     local start_line, end_line, url
 
     -- Check if a range is provided
@@ -59,16 +59,12 @@ function M.github_linker_command()
 
     -- save to clipboard
     if start_line and end_line then
-        url = M.github_linker(start_line, end_line)
+        url = github_remote_file_url(start_line, end_line)
     else
-        url = M.github_linker()
+        url = github_remote_file_url()
     end
 
-    if vim.g.nvim_github_linker_copy_to_clipboard then
-        vim.fn.setreg("*", url)
-    else
-        print(url)
-    end
+    vim.fn.setreg("*", url)
 end
 
 return M
