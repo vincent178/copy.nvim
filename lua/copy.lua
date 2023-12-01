@@ -32,17 +32,14 @@ end
 function M.copy_remote_file_url()
     local start_line, end_line, url
 
-    -- Check if a range is provided
     if vim.fn.line("'<") == 0 and vim.fn.line("'>") == 0 then
         start_line = vim.fn.line('.')
         end_line = start_line
     else
-        -- If no range is provided, use the current line
         start_line = vim.fn.line("'<")
         end_line = vim.fn.line("'>")
     end
 
-    -- save to clipboard
     if start_line and end_line then
         url = github_remote_file_url(start_line, end_line)
     else
