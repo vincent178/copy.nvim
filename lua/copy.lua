@@ -4,9 +4,13 @@ function M.copy_absolute_path()
     vim.fn.setreg("*", vim.fn.expand("%:p"))
 end
 
+vim.api.nvim_create_user_command("CopyAbsoluteFilePath", M.copy_absolute_path, {})
+
 function M.copy_relative_path()
     vim.fn.setreg("*", vim.fn.expand("%"))
 end
+
+vim.api.nvim_create_user_command("CopyRelativeFilePath", M.copy_relative_path, {})
 
 local function github_remote_file_url(start_line, end_line)
     local line_number = start_line or vim.fn.line('.')
@@ -48,5 +52,7 @@ function M.copy_remote_file_url()
 
     vim.fn.setreg("*", url)
 end
+
+vim.api.nvim_create_user_command("CopyRemoteFileUrl", M.copy_remote_file_url, {})
 
 return M
